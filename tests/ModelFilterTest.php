@@ -124,7 +124,7 @@ class ModelFilterTest extends TestCase
         $related = 'fakeRelation';
         $this->assertFalse($this->filter->relationIsLocal($related));
 
-        $this->filter->related($related, function($query) {
+        $this->filter->related($related, function ($query) {
             return $query->whereRaw('1 = 1');
         });
 
@@ -138,7 +138,7 @@ class ModelFilterTest extends TestCase
     {
         $this->assertEquals($this->filter->getLocalRelation('testRelation'), []);
 
-        $closure = function($query) {
+        $closure = function ($query) {
             return $query->where('id', 1);
         };
 
@@ -182,7 +182,7 @@ class ModelFilterTest extends TestCase
     {
         $related = 'fakeRelation';
 
-        $this->filter->whereRelated($related, 'id', '>=' ,1, 'or');
+        $this->filter->whereRelated($related, 'id', '>=', 1, 'or');
 
         $relatedClosures = $this->filter->getLocalRelation('fakeRelation');
 

@@ -168,7 +168,6 @@ class ModelFilter
         if ($column instanceof \Closure) {
             $closure = $column;
         } else {
-
             if ($value === null) {
                 $value = $operator;
                 $operator = '=';
@@ -231,7 +230,7 @@ class ModelFilter
     }
 
     /**
-     * Returns all local relations and relations requiring other Model's Filter's
+     * Returns all local relations and relations requiring other Model's Filter's.
      * @return array
      */
     public function getAllRelations()
@@ -248,7 +247,7 @@ class ModelFilter
     }
 
     /**
-     * Get all input to pass through related filters and local closures as an array
+     * Get all input to pass through related filters and local closures as an array.
      *
      * @param string $relation
      * @return array
@@ -383,7 +382,7 @@ class ModelFilter
     }
 
     /**
-     * Get input to pass to a related Model's Filter
+     * Get input to pass to a related Model's Filter.
      *
      * @param $related
      * @return array
@@ -394,7 +393,7 @@ class ModelFilter
     }
 
     /**
-     * Check to see if there is input or locally defined methods for the given relation
+     * Check to see if there is input or locally defined methods for the given relation.
      *
      * @param $relation
      * @return bool
@@ -405,7 +404,7 @@ class ModelFilter
     }
 
     /**
-     * Checks if there is input that should be passed to a related Model Filter
+     * Checks if there is input that should be passed to a related Model Filter.
      *
      * @param $related
      * @return bool
@@ -416,7 +415,7 @@ class ModelFilter
     }
 
     /**
-     * Checks to see if there are locally defined relations to filter
+     * Checks to see if there are locally defined relations to filter.
      *
      * @param $related
      * @return bool
