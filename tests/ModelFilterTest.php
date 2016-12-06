@@ -1,8 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-use EloquentFilter\ModelFilter;
 use Mockery as m;
+use EloquentFilter\ModelFilter;
+use PHPUnit\Framework\TestCase;
 
 class ModelFilterTest extends TestCase
 {

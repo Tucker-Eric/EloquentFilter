@@ -1,12 +1,12 @@
 <?php
 
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use EloquentFilter\TestClass\User;
 use EloquentFilter\TestClass\Client;
 use EloquentFilter\TestClass\UserFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Mockery as m;
 
 class ModelFilterChildTest extends TestCase
 {
