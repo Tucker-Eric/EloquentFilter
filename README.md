@@ -588,7 +588,7 @@ OR:
 ```php
     public function simpleIndex(Request $request)
     {
-        $users = User::filter($request->all())->paginateSimpleFilter();
+        $users = User::filter($request->all())->simplePaginateFilter();
 
         return view('users.index', compact('users'));
     }
