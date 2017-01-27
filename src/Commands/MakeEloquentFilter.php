@@ -112,7 +112,7 @@ class MakeEloquentFilter extends Command
 
         $fqClass = config('eloquentfilter.namespace', 'App\\ModelFilters\\').$ns.$className;
 
-        if (substr($fqClass, - 6, 6) !== 'Filter') {
+        if (substr($fqClass, -6, 6) !== 'Filter') {
             $fqClass .= 'Filter';
         }
 

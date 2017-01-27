@@ -14,5 +14,3 @@ if (trait_exists('Illuminate\Console\AppNamespaceDetectorTrait')) {
         use \Illuminate\Console\AppNamespaceDetectorTrait;
     }
 }
-
-

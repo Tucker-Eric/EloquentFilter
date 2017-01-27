@@ -39,7 +39,7 @@ class MakeEloquentFilterCommandTest extends TestCase
             ['user-filter', 'UserFilter'],
             ['adminUser', 'AdminUserFilter'],
             ['admin-user', 'AdminUserFilter'],
-            ['admin-user\\user-filter', 'AdminUser\\UserFilter']
+            ['admin-user\\user-filter', 'AdminUser\\UserFilter'],
         ];
     }
 }
