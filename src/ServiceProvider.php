@@ -19,7 +19,7 @@ class ServiceProvider extends LaravelServiceProvider
         ]);
     }
 
-     /**
+    /**
      * Register any application services.
      *
      * @return void

@@ -14,7 +14,6 @@ class LumenServiceProvider extends LaravelServiceProvider
      */
     public function boot()
     {
-
     }
 
     /**
