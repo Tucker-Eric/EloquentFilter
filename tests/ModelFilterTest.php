@@ -18,7 +18,7 @@ class ModelFilterTest extends TestCase
     {
         $this->builder = m::mock(Illuminate\Database\Eloquent\Builder::class);
         $this->filter = new ModelFilter($this->builder);
-        $this->config = require __DIR__ . '/config.php';
+        $this->config = require __DIR__.'/config.php';
         $this->testInput = $this->config['test_input'];
     }
 
