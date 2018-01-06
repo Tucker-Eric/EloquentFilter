@@ -221,8 +221,10 @@ class ModelFilterTest extends TestCase
 
     public function testRelatedReturnsFilter()
     {
-        $this->assertEquals($this->filter, $this->filter->related('relation', function() {}));
-        $this->assertEquals($this->filter, $this->filter->addRelated('relation', function() {}));
+        $this->assertEquals($this->filter, $this->filter->related('relation', function () {
+        }));
+        $this->assertEquals($this->filter, $this->filter->addRelated('relation', function () {
+        }));
         $this->assertEquals($this->filter, $this->filter->related('relation', 'param', 'val'));
     }
 }
