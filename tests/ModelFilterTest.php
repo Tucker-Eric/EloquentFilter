@@ -31,7 +31,7 @@ class ModelFilterTest extends TestCase
     {
         $this->builder = m::mock(EloquentBuilder::class);
         $this->filter = new TestModelFilter($this->builder);
-        $this->config = require __DIR__ . '/config.php';
+        $this->config = require __DIR__.'/config.php';
         $this->testInput = $this->config['test_input'];
     }
 

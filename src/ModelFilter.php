@@ -32,7 +32,7 @@ abstract class ModelFilter
     protected $allRelations = [];
 
     /**
-     * Array of method names that should not be called
+     * Array of method names that should not be called.
      * @var array
      */
     protected $blacklist = [];
@@ -257,7 +257,7 @@ abstract class ModelFilter
 
     public function callRelatedLocalSetup($related, $query)
     {
-        if (method_exists($this, $method = camel_case($related) . 'Setup')) {
+        if (method_exists($this, $method = camel_case($related).'Setup')) {
             $this->{$method}($query);
         }
     }
@@ -514,7 +514,7 @@ abstract class ModelFilter
     }
 
     /**
-     * Add method to the blacklist so disable calling it
+     * Add method to the blacklist so disable calling it.
      * @param string $method
      * @return $this
      */
@@ -526,7 +526,7 @@ abstract class ModelFilter
     }
 
     /**
-     * Remove a method from the blacklist
+     * Remove a method from the blacklist.
      * @param string $method
      * @return $this
      */
@@ -549,14 +549,14 @@ abstract class ModelFilter
     }
 
     /**
-     * Check if the method is not blacklisted and callable on the extended class
+     * Check if the method is not blacklisted and callable on the extended class.
      * @param $method
      * @return bool
      */
     public function methodIsCallable($method)
     {
-        return !$this->methodIsBlacklisted($method) &&
+        return ! $this->methodIsBlacklisted($method) &&
             method_exists($this, $method) &&
-            !method_exists(ModelFilter::class, $method);
+            ! method_exists(ModelFilter::class, $method);
     }
 }
