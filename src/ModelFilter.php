@@ -2,8 +2,8 @@
 
 namespace EloquentFilter;
 
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 /**
  * @mixin QueryBuilder
@@ -259,7 +259,7 @@ abstract class ModelFilter
 
     public function callRelatedLocalSetup($related, $query)
     {
-        if (method_exists($this, $method = camel_case($related) . 'Setup')) {
+        if (method_exists($this, $method = camel_case($related).'Setup')) {
             $this->{$method}($query);
         }
     }
@@ -557,27 +557,28 @@ abstract class ModelFilter
      */
     public function methodIsCallable($method)
     {
-        return !$this->methodIsBlacklisted($method) &&
+        return ! $this->methodIsBlacklisted($method) &&
             method_exists($this, $method) &&
-            !method_exists(ModelFilter::class, $method);
+            ! method_exists(ModelFilter::class, $method);
     }
-
 
     /**
      * Register paginate and simplePaginate macros on relations
-     * BelongsToMany overrides the QueryBuilder's paginate to append the pivot
+     * BelongsToMany overrides the QueryBuilder's paginate to append the pivot.
      */
     private function registerMacros()
     {
-        if (!Relation::hasMacro('paginateFilter') && !Relation::hasMacro('simplePaginateFilter')) {
+        if (! Relation::hasMacro('paginateFilter') && ! Relation::hasMacro('simplePaginateFilter')) {
             Relation::macro('paginateFilter', function () {
                 $paginator = call_user_func_array([$this, 'paginate'], func_get_args());
                 $paginator->appends($this->getRelated()->filtered);
+
                 return $paginator;
             });
             Relation::macro('simplePaginateFilter', function () {
                 $paginator = call_user_func_array([$this, 'simplePaginate'], func_get_args());
                 $paginator->appends($this->getRelated()->filtered);
+
                 return $paginator;
             });
         }

@@ -87,8 +87,8 @@ class ModelFilterChildTest extends TestCase
                     'driver'   => 'sqlite',
                     'database' => ':memory:',
                     'prefix'   => '',
-                ]
-            ]
+                ],
+            ],
         ];
         $container = m::mock(\Illuminate\Container\Container::class);
         $container->shouldReceive('bound')->andReturn(false);
@@ -122,10 +122,10 @@ class ModelFilterChildTest extends TestCase
         $clients = [['name' => 'one'], ['name' => 'two'], ['name' => 'three'], ['name' => 'four']];
         foreach ($clients as $index => $data) {
             $client = Client::create($data);
-            $user = User::create(['name' => 'Client' . $index]);
+            $user = User::create(['name' => 'Client'.$index]);
             $user->clients()->save($client);
             $client->managers()->save($user);
-            $otherUser = User::create(['name' => 'Client' . ++$index]);
+            $otherUser = User::create(['name' => 'Client'.++$index]);
             $client->managers()->save($otherUser);
         }
     }
