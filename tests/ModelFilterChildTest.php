@@ -72,7 +72,7 @@ class ModelFilterChildTest extends TestCase
 
     public function testPaginationWorksOnBelongsToMany()
     {
-        if(method_exists(\Illuminate\Database\Eloquent\Relations\Relation::class, 'macro')) {
+        if (method_exists(\Illuminate\Database\Eloquent\Relations\Relation::class, 'macro')) {
             $client = Client::query()->first();
             $managers = $client->managers()->filter()->paginateFilter();
             $this->assertInstanceOf(\Illuminate\Database\Eloquent\Relations\Pivot::class, $managers->first()->pivot);
@@ -80,8 +80,8 @@ class ModelFilterChildTest extends TestCase
             // Paginating relations will work before L5.4 but won't contain the pivot attribute
             $this->markTestSkipped(
                 'Pagination is overwritten with a Relation macro to append the pivot to pivotable relations.'
-                . ' This was introduced in Laravel 5.4 when Relations implemented the Macroable trait.'
-                . ' https://github.com/illuminate/database/commit/4d13b0f80439bd17befb0fd646a117b818efdb14'
+                .' This was introduced in Laravel 5.4 when Relations implemented the Macroable trait.'
+                .' https://github.com/illuminate/database/commit/4d13b0f80439bd17befb0fd646a117b818efdb14'
             );
         }
     }
