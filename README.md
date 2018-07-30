@@ -614,7 +614,7 @@ public function statusType($type)
 }
 ```
 
-The above example will pass `'all'` to the `stats()` method on the `clients` relation of the model.
+The above example will pass `'all'` to the `status()` method on the `clients` relation of the model.
 > Calling the `push()` method in the `setup()` method will allow you to push values to the input for filter it's called on
 
 #### Pagination
