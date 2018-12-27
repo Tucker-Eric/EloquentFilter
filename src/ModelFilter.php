@@ -200,7 +200,7 @@ abstract class ModelFilter
 
         // Remove '.' chars in methodName
         $methodName = str_replace('.', '', $methodName);
-       
+
         // Convert key to camelCase?
         $methodName = $this->camel_cased_methods ? camel_case($methodName) : $methodName;
 
@@ -541,7 +541,6 @@ abstract class ModelFilter
      */
     public function convertToCamelCasedMethods($bool = null)
     {
-
         if ($bool === null) {
             return $this->camel_cased_methods;
         }
