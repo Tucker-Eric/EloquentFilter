@@ -59,7 +59,7 @@ abstract class ModelFilter
 
     /**
      * Convert input keys to camelCase
-     * Ex: my_awesome_key will be converted to myAwesomeKey($value)
+     * Ex: my_awesome_key will be converted to myAwesomeKey($value).
      *
      * @var bool
      */
@@ -202,7 +202,7 @@ abstract class ModelFilter
         $methodName = str_replace('.', '', $methodName);
        
         // Convert key to camelCase?
-        $methodName  = $this->camel_cased_methods ? camel_case($methodName) : $methodName;
+        $methodName = $this->camel_cased_methods ? camel_case($methodName) : $methodName;
 
         return $methodName;
     }
@@ -532,7 +532,7 @@ abstract class ModelFilter
         return $this->drop_id = $bool;
     }
 
-     /**
+    /**
      * Convert input to camel_case. Mainly for testing.
      *
      * @param null $bool
