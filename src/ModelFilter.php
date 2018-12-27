@@ -58,6 +58,14 @@ abstract class ModelFilter
     protected $drop_id = true;
 
     /**
+     * Convert input keys to camelCase
+     * Ex: my_awesome_key will be converted to myAwesomeKey($value)
+     *
+     * @var bool
+     */
+    protected $camel_cased_methods = true;
+
+    /**
      * This is to be able to bypass relations if we are filtering a joined table.
      *
      * @var bool
@@ -187,7 +195,16 @@ abstract class ModelFilter
      */
     public function getFilterMethod($key)
     {
-        return camel_case(str_replace('.', '', $this->drop_id ? preg_replace('/^(.*)_id$/', '$1', $key) : $key));
+        // Drop ID?
+        $methodName = $this->drop_id ? preg_replace('/^(.*)_id$/', '$1', $key) : $key;
+
+        // Remove '.' chars in methodName
+        $methodName = str_replace('.', '', $methodName);
+       
+        // Convert key to camelCase?
+        $methodName  = $this->camel_cased_methods ? camel_case($methodName) : $methodName;
+
+        return $methodName;
     }
 
     /**
@@ -513,6 +530,23 @@ abstract class ModelFilter
         }
 
         return $this->drop_id = $bool;
+    }
+
+     /**
+     * Convert input to camel_case. Mainly for testing.
+     *
+     * @param null $bool
+     *
+     * @return bool
+     */
+    public function convertToCamelCasedMethods($bool = null)
+    {
+
+        if ($bool === null) {
+            return $this->camel_cased_methods;
+        }
+
+        return $this->camel_cased_methods = $bool;
     }
 
     /**

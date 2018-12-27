@@ -312,6 +312,9 @@ class UserFilter extends ModelFilter
 
 > **Note:**  In the above example if you do not want `_id` dropped from the end of the input you can set `protected $drop_id = false` on your filter class.  Doing this would allow you to have a `company()` filter method as well as a `companyId()` filter method.
 
+
+> **Note:**  In the above example if you do not want `mobile_phone` to be mapped to `mobilePhone()` you can set `protected $camel_cased_methods = false` on your filter class. Doing this would allow you to have a `mobile_phone()` filter method instead of `mobilePhone()`. By default, `mobilePhone()` filter method can be called thanks to one of the following input key: `mobile_phone`, `mobilePhone`, `mobile_phone_id`
+
 > **Note:** In the example above all methods inside `setup()` will be called every time `filter()` is called on the model
 
 #### Blacklist

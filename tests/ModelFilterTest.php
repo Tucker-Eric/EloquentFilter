@@ -131,8 +131,22 @@ class ModelFilterTest extends TestCase
         $this->filter->dropIdSuffix(true);
         $this->assertEquals('userName', $this->filter->getFilterMethod($key));
 
+        $this->filter->convertToCamelCasedMethods(false);
+        $this->assertEquals('user_name', $this->filter->getFilterMethod($key));
+
+        $this->filter->convertToCamelCasedMethods(true);
         $this->filter->dropIdSuffix(false);
-        $this->assertEquals('userNameId', $this->filter->getFilterMethod($key));
+        $this->assertEquals('userNameId', $this->filter->getFilterMethod($key));    
+    }
+
+    public function testGetFilterMethodWithSnakeCaseFilter() {
+        $key = 'user_name';
+
+        $this->filter->convertToCamelCasedMethods(true);
+        $this->assertEquals('userName', $this->filter->getFilterMethod($key));
+
+        $this->filter->convertToCamelCasedMethods(false);
+        $this->assertEquals('user_name', $this->filter->getFilterMethod($key));
     }
 
     public function testRelatedMethodBooleans()
