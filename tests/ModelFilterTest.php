@@ -139,7 +139,7 @@ class ModelFilterTest extends TestCase
         $this->assertEquals('userNameId', $this->filter->getFilterMethod($key));
     }
 
-    public function testGetFilterMethodWithSnakeCaseFilter() 
+    public function testGetFilterMethodWithSnakeCaseFilter()
     {
         $key = 'user_name';
 
