@@ -49,6 +49,7 @@ trait Filterable
      */
     public function scopePaginateFilter($query, $perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
+        $perPage = $perPage ?: config('eloquentfilter.paginate_limit');
         $paginator = $query->paginate($perPage, $columns, $pageName, $page);
         $paginator->appends($this->filtered);
 
@@ -68,6 +69,7 @@ trait Filterable
      */
     public function scopeSimplePaginateFilter($query, $perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
+        $perPage = $perPage ?: config('eloquentfilter.paginate_limit');
         $paginator = $query->simplePaginate($perPage, $columns, $pageName, $page);
         $paginator->appends($this->filtered);
 

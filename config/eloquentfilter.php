@@ -25,4 +25,15 @@ return [
 //    'generator' => [
 //        'stub' => app_path('stubs/modelfilter.stub')
 //    ]
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom generator stub
+    |--------------------------------------------------------------------------
+    |
+    | Set paginate limit
+    |
+    */
+    'paginate_limit' => env('PAGINATION_LIMIT_DEFAULT',15)
+
 ];
