@@ -199,7 +199,24 @@ abstract class ModelFilter
         $methodName = str_replace('.', '', $this->drop_id ? preg_replace('/^(.*)_id$/', '$1', $key) : $key);
 
         // Convert key to camelCase?
-        return $this->camel_cased_methods ? camel_case($methodName) : $methodName;
+        return $this->camel_cased_methods ? $this->convertToCamelCase($methodName) : $methodName;
+    }
+
+    /**
+     * Convert a string to camel case.
+     *
+     * @param $value
+     * @return string
+     */
+    protected function convertToCamelCase($value)
+    {
+        if (function_exists('camel_case')) {
+            return camel_case($value);
+        }
+
+        $value = ucwords(str_replace(['-', '_'], ' ', $value));
+
+        return lcfirst(str_replace(' ', '', $value));
     }
 
     /**
