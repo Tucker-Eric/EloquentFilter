@@ -2,9 +2,9 @@
 
 namespace EloquentFilter;
 
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Arr;
 
 /**
  * @mixin QueryBuilder
