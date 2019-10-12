@@ -186,7 +186,7 @@ class User extends Model
 
     public function modelFilter()
     {
-        return $this->provideFilter(App\ModelFilters\CustomFilters\CustomUserFilter::class);
+        return $this->provideFilter(\App\ModelFilters\CustomFilters\CustomUserFilter::class);
     }
 
     //User Class
