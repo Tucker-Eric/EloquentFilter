@@ -1,6 +1,6 @@
-name: PHP Composer
+name: PHPUnit
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   test:
