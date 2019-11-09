@@ -2,8 +2,8 @@
 
 namespace EloquentFilter;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
