@@ -80,11 +80,18 @@ class MakeEloquentFilter extends Command
 
     public function applyValuesToStub($stub)
     {
-        $className = class_basename($this->getClassName());
+        $className = $this->getClassBasename($this->getClassName());
         $search = ['{{class}}', '{{namespace}}'];
         $replace = [$className, str_replace('\\'.$className, '', $this->getClassName())];
 
         return str_replace($search, $replace, $stub);
+    }
+
+    private function getClassBasename($class)
+    {
+        $class = is_object($class) ? get_class($class) : $class;
+
+        return basename(str_replace('\\', '/', $class));
     }
 
     public function getPath()
