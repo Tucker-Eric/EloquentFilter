@@ -1,16 +1,16 @@
 <?php
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
-use EloquentFilter\TestClass\User;
 use EloquentFilter\TestClass\Client;
-use Illuminate\Database\Eloquent\Model;
+use EloquentFilter\TestClass\User;
 use EloquentFilter\TestClass\UserFilter;
+use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Database\Schema\Builder as SchemaBuilder;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 class ModelFilterChildTest extends TestCase
 {

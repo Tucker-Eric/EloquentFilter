@@ -1,9 +1,9 @@
 <?php
 
-use Mockery as m;
 use EloquentFilter\ModelFilter;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 class ModelFilterTest extends TestCase
 {
