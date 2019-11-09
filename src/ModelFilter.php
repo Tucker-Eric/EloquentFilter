@@ -4,6 +4,8 @@ namespace EloquentFilter;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * @mixin QueryBuilder
@@ -199,24 +201,7 @@ abstract class ModelFilter
         $methodName = str_replace('.', '', $this->drop_id ? preg_replace('/^(.*)_id$/', '$1', $key) : $key);
 
         // Convert key to camelCase?
-        return $this->camel_cased_methods ? $this->convertToCamelCase($methodName) : $methodName;
-    }
-
-    /**
-     * Convert a string to camel case.
-     *
-     * @param $value
-     * @return string
-     */
-    protected function convertToCamelCase($value)
-    {
-        if (function_exists('camel_case')) {
-            return camel_case($value);
-        }
-
-        $value = ucwords(str_replace(['-', '_'], ' ', $value));
-
-        return lcfirst(str_replace(' ', '', $value));
+        return $this->camel_cased_methods ? Str::camel($methodName) : $methodName;
     }
 
     /**
@@ -286,9 +271,15 @@ abstract class ModelFilter
         return array_key_exists($relation, $this->allRelations) ? $this->allRelations[$relation] : [];
     }
 
+    /**
+     * Call setup method for relation before filtering on it.
+     *
+     * @param $related
+     * @param $query
+     */
     public function callRelatedLocalSetup($related, $query)
     {
-        if (method_exists($this, $method = camel_case($related).'Setup')) {
+        if (method_exists($this, $method = Str::camel($related).'Setup')) {
             $this->{$method}($query);
         }
     }
@@ -417,7 +408,7 @@ abstract class ModelFilter
      */
     public function getRelatedFilterInput($related)
     {
-        return array_key_exists($related, $this->relations) ? array_only($this->input, $this->relations[$related]) : [];
+        return array_key_exists($related, $this->relations) ? Arr::only($this->input, $this->relations[$related]) : [];
     }
 
     /**

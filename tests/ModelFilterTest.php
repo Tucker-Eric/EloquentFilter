@@ -318,10 +318,24 @@ class ModelFilterTest extends TestCase
 
         $filter->filterInput();
     }
+
+    public function testRelatedLocalSetup()
+    {
+        $query = m::mock(EloquentBuilder::class);
+        $query->shouldReceive('where')->with('setupcalled', '=', true)->once()->andReturnSelf();
+        $this->filter->callRelatedLocalSetup('relation', $query);
+        // If the mock isn't called we'll fail
+        $this->addToAssertionCount(1);
+    }
 }
 
 class TestModelFilter extends ModelFilter
 {
+    public function relationSetup($query)
+    {
+        $query->where('setupcalled', '=', true);
+    }
+
     public function filterItem($item)
     {
         $this->where($item);

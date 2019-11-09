@@ -4,6 +4,7 @@ namespace EloquentFilter\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 class MakeEloquentFilter extends Command
 {
@@ -121,7 +122,7 @@ class MakeEloquentFilter extends Command
      */
     public function makeClassName()
     {
-        $parts = array_map('studly_case', explode('\\', $this->argument('name')));
+        $parts = array_map([Str::class, 'studly'], explode('\\', $this->argument('name')));
         $className = array_pop($parts);
         $ns = count($parts) > 0 ? implode('\\', $parts).'\\' : '';
 
