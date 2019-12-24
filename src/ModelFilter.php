@@ -351,7 +351,28 @@ abstract class ModelFilter
      */
     public function getRelatedModel($relation)
     {
+        if (strpos($relation, '.') !== false) {
+            return $this->getNestedRelatedModel($relation);
+        }
+
         return $this->query->getModel()->{$relation}()->getRelated();
+    }
+
+    /**
+     * @param $relationString
+     * @return QueryBuilder|\Illuminate\Database\Eloquent\Model
+     */
+    protected function getNestedRelatedModel($relationString)
+    {
+        $parts = explode('.', $relationString);
+        $related = $this->query->getModel();
+
+        do {
+            $relation = array_shift($parts);
+            $related = $related->{$relation}()->getRelated();
+        } while (! empty($parts));
+
+        return $related;
     }
 
     /**

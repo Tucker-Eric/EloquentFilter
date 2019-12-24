@@ -25,4 +25,9 @@ class UserFilter extends ModelFilter
     {
         return $this;
     }
+
+    public function clientLocation($location)
+    {
+        $this->related('clients.locations', 'name', $location);
+    }
 }

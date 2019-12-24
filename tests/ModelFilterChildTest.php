@@ -1,13 +1,12 @@
 <?php
 
 use EloquentFilter\TestClass\Client;
+use EloquentFilter\TestClass\Location;
 use EloquentFilter\TestClass\User;
 use EloquentFilter\TestClass\UserFilter;
 use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Schema\Builder as SchemaBuilder;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
@@ -39,19 +38,11 @@ class ModelFilterChildTest extends TestCase
 
     public function testGetRelatedModel()
     {
-        $userMock = m::mock(User::class);
-        $userQueryMock = m::mock(Builder::class);
-        $hasManyMock = m::mock(HasMany::class);
-
-        $userQueryMock->shouldReceive('getModel')->once()->andReturn($userMock);
-
-        $userMock->shouldReceive('clients')->once()->andReturn($hasManyMock);
-
-        $hasManyMock->shouldReceive('getRelated')->once()->andReturn(new Client);
-
-        $client = (new UserFilter($userQueryMock))->getRelatedModel('clients');
-
-        $this->assertEquals($client, new Client);
+        $filter = new UserFilter($this->model->newQuery());
+        // Regular relation
+        $this->assertInstanceOf(Client::class, $filter->getRelatedModel('clients'));
+        // Nested relation
+        $this->assertInstanceOf(Location::class, $filter->getRelatedModel('clients.locations'));
     }
 
     public function testProvideFilter()
@@ -68,6 +59,12 @@ class ModelFilterChildTest extends TestCase
     public function testGetModelFilterClass()
     {
         $this->assertEquals($this->model->getModelFilterClass(), EloquentFilter\TestClass\UserFilter::class);
+    }
+
+    public function testRelationDotNotation()
+    {
+        $users = $this->model->filter(['client_location' => 'one'])->get();
+        $this->assertEquals(1, $users->count());
     }
 
     public function testPaginationWorksOnBelongsToMany()
@@ -130,7 +127,10 @@ class ModelFilterChildTest extends TestCase
 
         $clients = [['name' => 'one'], ['name' => 'two'], ['name' => 'three'], ['name' => 'four']];
         foreach ($clients as $index => $data) {
+            /** @var Client $client */
             $client = Client::create($data);
+            $client->locations()->create($data);
+            /** @var User $user */
             $user = User::create(['name' => 'Client'.$index]);
             $user->clients()->save($client);
             $client->managers()->save($user);
