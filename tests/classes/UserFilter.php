@@ -13,7 +13,7 @@ class UserFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'clients' => ['client_name'],
+        'clients' => ['client_name' => 'name'],
     ];
 
     public function setup()
@@ -29,5 +29,10 @@ class UserFilter extends ModelFilter
     public function clientLocation($location)
     {
         $this->related('clients.locations', 'name', $location);
+    }
+
+    public function ownerName($name)
+    {
+        $this->where('name', '=', $name);
     }
 }

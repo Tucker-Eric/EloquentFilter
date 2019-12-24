@@ -534,6 +534,39 @@ class ClientFilter extends ModelFilter
     }
 }
 ```
+##### `$relations` array alias support
+The `$relations` array supports aliases. This is used when the input doesn't match the related model's filter method.
+This will transform the input keys being passed to the related model filter's input.
+
+##### Example:
+```php
+class UserFilter extends ModelFilter
+{
+    public $relations = [
+        'clients' => [
+            'client_industry'  => 'industry',
+            'client_potential' => 'potential_volume'
+        ]
+    ];
+}
+```
+
+The above will receive an array like:
+```php
+[
+    'client_industry' => 1,
+    'client_potential' => 100000
+]
+```
+And the `ClientFilter` will receive it as:
+```php
+[
+    'industry'         => 1,
+    'potential_volume' => 100000
+]
+```
+Allowing for more descriptive input names without filters needing to match. Allowing for more reuse of the same filters.
+
 #### Filter Related Models With Both Methods
 You can even use both together and it will produce the same result and only query the related model once.  An example would be:
 

@@ -13,6 +13,11 @@ class ClientFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'user' => ['owner_name'],
+        'agent' => ['owner_name'],
     ];
+
+    public function name($name)
+    {
+        $this->where('name', '=', $name);
+    }
 }

@@ -67,6 +67,18 @@ class ModelFilterChildTest extends TestCase
         $this->assertEquals(1, $users->count());
     }
 
+    public function testFilterRelationsArrayAliases()
+    {
+        // client_name is defined as ['clients' => ['client_name' => 'name' ]];
+        // This will forward and call ClientFilter::name
+        $users = $this->model->filter(['client_name' => 'one'])->get();
+        $this->assertEquals(1, $users->count());
+
+        $client = new Client;
+        $clients = $client->filter(['owner_name' => 'Client1'])->get();
+        $this->assertEquals(1, $clients->count());
+    }
+
     public function testPaginationWorksOnBelongsToMany()
     {
         if (method_exists(\Illuminate\Database\Eloquent\Relations\Relation::class, 'macro')) {
