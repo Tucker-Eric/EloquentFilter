@@ -78,6 +78,7 @@ class ModelFilterChildTest extends TestCase
         $clients = $client->filter(['owner_name' => 'Client1'])->get();
         $this->assertEquals(1, $clients->count());
     }
+
     public function testPaginationWorksOnBelongsToMany()
     {
         if (method_exists(\Illuminate\Database\Eloquent\Relations\Relation::class, 'macro')) {

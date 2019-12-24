@@ -431,11 +431,11 @@ abstract class ModelFilter
     {
         $output = [];
 
-        if(array_key_exists($related, $this->relations)) {
-            foreach((array)$this->relations[$related] as $alias => $name) {
+        if (array_key_exists($related, $this->relations)) {
+            foreach ((array) $this->relations[$related] as $alias => $name) {
                 // If the alias is a string that is what we grab from the input
                 // Then use the name for the output so we can alias relations
-                if($value = Arr::get($this->input, is_string($alias) ? $alias : $name)) {
+                if ($value = Arr::get($this->input, is_string($alias) ? $alias : $name)) {
                     $output[$name] = $value;
                 }
             }
