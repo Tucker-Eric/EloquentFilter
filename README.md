@@ -500,7 +500,7 @@ Add the relation in the `$relations` array with the name of the relation as refe
 
 The related model **MUST** have a ModelFilter associated with it.  We instantiate the related model's filter and use the input values from the `$relations` array to call the associated methods.
 
-This is helpful when querying multiple columns on a relation's table while avoiding multipe `whereHas()` calls for the same relationship.  For a single column using a `$this->whereHas()` method in the model filter works just fine.  In fact, under ther hood the model filter applies all constraints in the `whereHas()` method.
+This is helpful when querying multiple columns on a relation's table while avoiding multiple `whereHas()` calls for the same relationship.  For a single column using a `$this->whereHas()` method in the model filter works just fine.  In fact, under ther hood the model filter applies all constraints in the `whereHas()` method.
 
 ##### Example:
 
