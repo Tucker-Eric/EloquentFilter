@@ -27,7 +27,7 @@ trait Filterable
         }
 
         // Create the model filter instance
-        $modelFilter = new $filter($query, $input);
+        $modelFilter = resolve($filter, ['query' => $query, 'input' => $input]);
 
         // Set the input that was used in the filter (this will exclude empty strings)
         $this->filtered = $modelFilter->input();
