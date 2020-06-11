@@ -306,7 +306,7 @@ abstract class ModelFilter
             $filterClass = $this->getRelatedFilter($related);
 
             // Disable querying joined relations on filters of joined tables.
-            (new $filterClass($this->query, $relatedFilterInput, false))->handle();
+            (resolve($filterClass, ['query' => $this->query, 'input' => $relatedFilterInput, 'relationsEnabled' => false]))->handle();
         }
     }
 
