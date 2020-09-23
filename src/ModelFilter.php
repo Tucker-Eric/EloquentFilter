@@ -122,7 +122,11 @@ abstract class ModelFilter
         $filterableInput = [];
 
         foreach ($input as $key => $val) {
-            if ($val !== '' && $val !== null) {
+            if (is_array($val)) {
+                if (! empty($val)) {
+                    $filterableInput[$key] = $val;
+                }
+            } else if ($val !== '' && $val !== null) {
                 $filterableInput[$key] = $val;
             }
         }
