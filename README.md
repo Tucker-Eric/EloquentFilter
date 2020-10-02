@@ -1,4 +1,7 @@
-# Eloquent Filter
+could you please elaborate more
+
+
+96.# Eloquent Filter
 
 [![Latest Stable Version](https://poser.pugx.org/tucker-eric/eloquentfilter/v/stable)](https://packagist.org/packages/tucker-eric/eloquentfilter)
 [![Total Downloads](https://poser.pugx.org/tucker-eric/eloquentfilter/downloads)](https://packagist.org/packages/tucker-eric/eloquentfilter)
