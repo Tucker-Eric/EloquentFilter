@@ -181,6 +181,7 @@ namespace App;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
+//User Class
 class User extends Model
 {
     use Filterable;
@@ -190,7 +191,7 @@ class User extends Model
         return $this->provideFilter(\App\ModelFilters\CustomFilters\CustomUserFilter::class);
     }
 
-    //User Class
+  
 }
 ```
 #### Dynamic Filters
