@@ -123,8 +123,8 @@ abstract class ModelFilter
 
         foreach ($input as $key => $val) {
             if (is_array($val)) {
-                if (! empty($val)) {
-                    $filterableInput[$key] = $val;
+                if ($arrayVal = $this->removeEmptyInput($val)) {
+                    $filterableInput[$key] = $arrayVal;
                 }
             } else if ($val !== '' && $val !== null) {
                 $filterableInput[$key] = $val;
