@@ -8,7 +8,39 @@
 [![Build Status](https://travis-ci.org/Tucker-Eric/EloquentFilter.svg?branch=master)](https://travis-ci.org/Tucker-Eric/EloquentFilter)
 [![PHPUnit Status](https://github.com/Tucker-Eric/EloquentFilter/workflows/PHPUnit/badge.svg?branch=master)](https://github.com/Tucker-Eric/EloquentFilter/actions?query=branch%3Amaster)
 
-An Eloquent way to filter Eloquent Models and their relationships
+An Eloquent way to filter Eloquent Models and their relationships  
+
+- [Eloquent Filter](#eloquent-filter)
+  * [Introduction](#introduction)
+  * [Configuration](#configuration)
+    + [Install Through Composer](#install-through-composer)
+      - [Default Settings](#default-settings)
+      - [Laravel](#laravel)
+        * [With Configuration File (Optional)](#with-configuration-file--optional-)
+      - [Lumen](#lumen)
+        * [Register The Service Provider (Optional)](#register-the-service-provider--optional-)
+        * [Change The Default Namespace](#change-the-default-namespace)
+      - [Define The Default Model Filter (optional)](#define-the-default-model-filter--optional-)
+      - [Dynamic Filters](#dynamic-filters)
+    + [Generating The Filter](#generating-the-filter)
+  * [Usage](#usage)
+    + [Defining The Filter Logic](#defining-the-filter-logic)
+      - [Blacklist](#blacklist)
+      - [Additional Filter Methods](#additional-filter-methods)
+    + [Applying The Filter To A Model](#applying-the-filter-to-a-model)
+  * [Filtering By Relationships](#filtering-by-relationships)
+    + [Setup](#setup)
+    + [Ways To Filter Related Models](#ways-to-filter-related-models)
+      - [Filter Related Models With The `related()` Method:](#filter-related-models-with-the--related----method-)
+        * [Example:](#example-)
+      - [Filter Related Models Using The `$relations` Array:](#filter-related-models-using-the---relations--array-)
+        * [Example:](#example--1)
+        * [`$relations` array alias support](#--relations--array-alias-support)
+        * [Example:](#example--2)
+      - [Filter Related Models With Both Methods](#filter-related-models-with-both-methods)
+        * [Adding Relation Values To Filter](#adding-relation-values-to-filter)
+      - [Pagination](#pagination)
+- [Contributing](#contributing)
 
 ## Introduction
 Lets say we want to return a list of users filtered by multiple parameters. When we navigate to:
