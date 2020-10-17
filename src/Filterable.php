@@ -23,7 +23,7 @@ trait Filterable
      */
     private function getFilterWhereOperator()
     {
-        if(!isset($this->filterWhereOperator)){
+        if (!isset($this->filterWhereOperator)) {
             switch(config('database.default')){
                 case 'pgsql':
                     $this->filterWhereOperator = 'ILIKE';
