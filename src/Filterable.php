@@ -19,9 +19,9 @@ trait Filterable
     protected $filterWhereOperator;
 
     /**
-     * Filterable constructor.
+     * Returns the standard operator used for where operations according to the database
      */
-    public function __construct()
+    private function getFilterWhereOperator()
     {
         if(!isset($this->filterWhereOperator)){
             switch(config('database.default')){
@@ -33,6 +33,8 @@ trait Filterable
                     break;
             }
         }
+
+        return $this->filterWhereOperator;
     }
 
     /**
@@ -136,7 +138,7 @@ trait Filterable
      */
     public function scopeWhereLike($query, $column, $value, $boolean = 'and')
     {
-        return $query->where($column, $this->filterWhereOperator, "%$value%", $boolean);
+        return $query->where($column, $this->getFilterWhereOperator(), "%$value%", $boolean);
     }
 
     /**
@@ -150,7 +152,7 @@ trait Filterable
      */
     public function scopeWhereBeginsWith($query, $column, $value, $boolean = 'and')
     {
-        return $query->where($column, $this->filterWhereOperator, "$value%", $boolean);
+        return $query->where($column, $this->getFilterWhereOperator(), "$value%", $boolean);
     }
 
     /**
@@ -164,6 +166,6 @@ trait Filterable
      */
     public function scopeWhereEndsWith($query, $column, $value, $boolean = 'and')
     {
-        return $query->where($column, $this->filterWhereOperator, "%$value", $boolean);
+        return $query->where($column, $this->getFilterWhereOperator(), "%$value", $boolean);
     }
 }
