@@ -12,19 +12,19 @@ trait Filterable
     protected $filtered = [];
 
     /**
-     * Operator used to filter queries with where
+     * Operator used to filter queries with where.
      *
      * @var string
      */
     protected $filterWhereOperator;
 
     /**
-     * Returns the standard operator used for where operations according to the database
+     * Returns the standard operator used for where operations according to the database.
      */
     private function getFilterWhereOperator()
     {
-        if (!isset($this->filterWhereOperator)) {
-            switch(config('database.default')){
+        if (! isset($this->filterWhereOperator)) {
+            switch (config('database.default')) {
                 case 'pgsql':
                     $this->filterWhereOperator = 'ILIKE';
                     break;
