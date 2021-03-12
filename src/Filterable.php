@@ -23,7 +23,7 @@ trait Filterable
     {
         // Resolve the current Model's filter
         if ($filter === null) {
-            $filter = $this->getModelFilterClass();
+            $filter = $this->getModelFilterClass($query, $input);
         }
 
         // Create the model filter instance
@@ -96,9 +96,9 @@ trait Filterable
      *
      * @return string
      */
-    public function getModelFilterClass()
+    public function getModelFilterClass($query, $input)
     {
-        return method_exists($this, 'modelFilter') ? $this->modelFilter() : $this->provideFilter();
+        return method_exists($this, 'modelFilter') ? $this->modelFilter($query, $input) : $this->provideFilter($query, $input);
     }
 
     /**
