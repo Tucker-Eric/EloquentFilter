@@ -167,11 +167,15 @@ class ModelFilterTest extends TestCase
     public function testGetFilterInputForRelationsArray()
     {
         $this->filter->relations = [
-            'roles' => ['roles'],
+            'roles' => ['roles', 'enabled', 'flagged'],
         ];
         $this->filter->push($this->testInput);
 
-        $this->assertEquals($this->filter->getRelatedFilterInput('roles'), ['roles' => $this->filter->input('roles')]);
+        $this->filter->push(['enabled' => 0]);
+
+        $this->filter->push(['flagged' => 1]);
+
+        $this->assertEquals($this->filter->getRelatedFilterInput('roles'), ['roles' => $this->filter->input('roles'), 'enabled' => $this->filter->input('enabled'), 'flagged' => $this->filter->input('flagged')]);
     }
 
     /**

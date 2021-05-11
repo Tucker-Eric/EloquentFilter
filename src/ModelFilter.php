@@ -4,7 +4,6 @@ namespace EloquentFilter;
 
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
@@ -435,8 +434,14 @@ abstract class ModelFilter
             foreach ((array) $this->relations[$related] as $alias => $name) {
                 // If the alias is a string that is what we grab from the input
                 // Then use the name for the output so we can alias relations
-                if ($value = Arr::get($this->input, is_string($alias) ? $alias : $name)) {
-                    $output[$name] = $value;
+                $keyName = is_string($alias) ? $alias : $name;
+
+                if (array_key_exists($keyName, $this->input)) {
+                    $keyValue = $this->input[$keyName];
+
+                    if ($this->includeFilterInput($keyName, $keyValue)) {
+                        $output[$name] = $keyValue;
+                    }
                 }
             }
         }
