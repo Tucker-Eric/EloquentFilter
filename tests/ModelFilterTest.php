@@ -27,7 +27,7 @@ class ModelFilterTest extends TestCase
      */
     protected $config;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->builder = m::mock(EloquentBuilder::class);
         $this->filter = new TestModelFilter($this->builder);
@@ -35,7 +35,7 @@ class ModelFilterTest extends TestCase
         $this->testInput = $this->config['test_input'];
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -193,7 +193,7 @@ class ModelFilterTest extends TestCase
         // Return closure
         $relatedClosure = $this->filter->getLocalRelation('testRelation')[0];
 
-        $this->assertInternalType('callable', $relatedClosure);
+        $this->assertIsCallable($relatedClosure);
 
         $query = m::mock(EloquentBuilder::class);
 
@@ -211,7 +211,7 @@ class ModelFilterTest extends TestCase
 
         $relatedClosure = $this->filter->getLocalRelation('fakeRelation')[0];
 
-        $this->assertInternalType('callable', $relatedClosure);
+        $this->assertIsCallable($relatedClosure);
 
         $query = m::mock(EloquentBuilder::class);
 
@@ -229,7 +229,7 @@ class ModelFilterTest extends TestCase
 
         $relatedClosure = $this->filter->getLocalRelation('fakeRelation')[0];
 
-        $this->assertInternalType('callable', $relatedClosure);
+        $this->assertIsCallable($relatedClosure);
 
         $query = m::mock(EloquentBuilder::class);
 

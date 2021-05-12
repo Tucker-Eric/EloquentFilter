@@ -25,13 +25,13 @@ class ModelFilterChildTest extends TestCase
      */
     protected $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->model = new User;
         $this->dbSetup();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }

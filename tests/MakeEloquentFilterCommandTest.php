@@ -9,13 +9,13 @@ class MakeEloquentFilterCommandTest extends TestCase
 
     protected $command;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->filesystem = m::mock(Illuminate\Filesystem\Filesystem::class);
         $this->command = m::mock('EloquentFilter\Commands\MakeEloquentFilter[argument]', [$this->filesystem]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
