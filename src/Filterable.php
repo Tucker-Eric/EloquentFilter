@@ -12,6 +12,32 @@ trait Filterable
     protected $filtered = [];
 
     /**
+     * Operator used to filter queries with where.
+     *
+     * @var string
+     */
+    protected $filterWhereOperator;
+
+    /**
+     * Returns the standard operator used for where operations according to the database.
+     */
+    private function getFilterWhereOperator()
+    {
+        if (! isset($this->filterWhereOperator)) {
+            switch (config('database.default')) {
+                case 'pgsql':
+                    $this->filterWhereOperator = 'ILIKE';
+                    break;
+                default:
+                    $this->filterWhereOperator = 'LIKE';
+                    break;
+            }
+        }
+
+        return $this->filterWhereOperator;
+    }
+
+    /**
      * Creates local scope to run the filter.
      *
      * @param $query
@@ -112,7 +138,7 @@ trait Filterable
      */
     public function scopeWhereLike($query, $column, $value, $boolean = 'and')
     {
-        return $query->where($column, 'LIKE', "%$value%", $boolean);
+        return $query->where($column, $this->getFilterWhereOperator(), "%$value%", $boolean);
     }
 
     /**
@@ -126,7 +152,7 @@ trait Filterable
      */
     public function scopeWhereBeginsWith($query, $column, $value, $boolean = 'and')
     {
-        return $query->where($column, 'LIKE', "$value%", $boolean);
+        return $query->where($column, $this->getFilterWhereOperator(), "$value%", $boolean);
     }
 
     /**
@@ -140,6 +166,6 @@ trait Filterable
      */
     public function scopeWhereEndsWith($query, $column, $value, $boolean = 'and')
     {
-        return $query->where($column, 'LIKE', "%$value", $boolean);
+        return $query->where($column, $this->getFilterWhereOperator(), "%$value", $boolean);
     }
 }
