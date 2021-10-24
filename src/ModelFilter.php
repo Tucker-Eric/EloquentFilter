@@ -168,8 +168,8 @@ abstract class ModelFilter
      *
      * @param $relation
      * @param $column
-     * @param null $operator
-     * @param null $value
+     * @param string|null $operator
+     * @param string|null $value
      * @param string $boolean
      * @return $this
      */
