@@ -39,7 +39,7 @@ class MakeEloquentFilter extends Command
     /**
      * MakeEloquentFilter constructor.
      *
-     * @param Filesystem $files
+     * @param  Filesystem  $files
      */
     public function __construct(Filesystem $files)
     {
@@ -112,7 +112,7 @@ class MakeEloquentFilter extends Command
     /**
      * Build the directory for the class if necessary.
      *
-     * @param  string $path
+     * @param  string  $path
      * @return string
      */
     protected function makeDirectory($path)
