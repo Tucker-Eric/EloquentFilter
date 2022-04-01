@@ -84,6 +84,33 @@ abstract class ModelFilter
     private $_joinedTables;
 
     /**
+     * Customization "order by" key name
+     *
+     * @var string
+     */
+    protected $orderByKey = 'order_by';
+    /**
+     * Order by passed column name
+     *
+     * @var
+     */
+    protected $orderBy;
+
+
+    /**
+     * Customization "order" name
+     *
+     * @var string
+     */
+    protected $orderKey = 'order';
+    /**
+     * Order, should be 'DESC' or 'ASC'
+     *
+     * @var string
+     */
+    protected $order = 'DESC';
+
+    /**
      * ModelFilter constructor.
      *
      * @param $query
@@ -145,6 +172,10 @@ abstract class ModelFilter
 
         // Run input filters
         $this->filterInput();
+
+        // Run sort
+        $this->sort();
+
         // Set up all the whereHas and joins constraints
         $this->filterRelations();
 
@@ -211,6 +242,16 @@ abstract class ModelFilter
     public function filterInput()
     {
         foreach ($this->input as $key => $val) {
+            if ($key == $this->orderByKey) {
+                $this->orderBy = $val;
+                continue;
+            }
+
+            if ($key == $this->orderKey) {
+                $this->order = $val;
+                continue;
+            }
+
             // Call all local methods on filter
             $method = $this->getFilterMethod($key);
 
@@ -677,6 +718,18 @@ abstract class ModelFilter
 
                 return $paginator;
             });
+        }
+    }
+
+    /**
+     * Method to add order query if input should be passed with order parameter
+     *
+     * @return void
+     */
+    protected function sort()
+    {
+        if ($this->orderBy) {
+            $this->orderBy($this->orderBy, $this->order);
         }
     }
 }
