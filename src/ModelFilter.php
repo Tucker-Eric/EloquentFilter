@@ -84,27 +84,26 @@ abstract class ModelFilter
     private $_joinedTables;
 
     /**
-     * Customization "order by" key name
+     * Customization "order by" key name.
      *
      * @var string
      */
     protected $orderByKey = 'order_by';
     /**
-     * Order by passed column name
+     * Order by passed column name.
      *
      * @var
      */
     protected $orderBy;
 
-
     /**
-     * Customization "order" name
+     * Customization "order" name.
      *
      * @var string
      */
     protected $orderKey = 'order';
     /**
-     * Order, should be 'DESC' or 'ASC'
+     * Order, should be 'DESC' or 'ASC'.
      *
      * @var string
      */
@@ -722,7 +721,7 @@ abstract class ModelFilter
     }
 
     /**
-     * Method to add order query if input should be passed with order parameter
+     * Method to add order query if input should be passed with order parameter.
      *
      * @return void
      */
