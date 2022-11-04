@@ -7,7 +7,7 @@
 [![StyleCI](https://styleci.io/repos/53163405/shield)](https://styleci.io/repos/53163405/)
 [![PHPUnit Status](https://github.com/Tucker-Eric/EloquentFilter/workflows/PHPUnit/badge.svg?branch=master)](https://github.com/Tucker-Eric/EloquentFilter/actions?query=branch%3Amaster)
 
-An Eloquent way to filter Eloquent Models and their relationships
+An Eloquent way to filter Eloquent Models and their relationships.
 
 ## Introduction
 Lets say we want to return a list of users filtered by multiple parameters. When we navigate to:
