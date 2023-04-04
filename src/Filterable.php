@@ -2,6 +2,14 @@
 
 namespace EloquentFilter;
 
+/**
+ * @method filter(array $input = [], $filter = null)
+ * @method paginateFilter($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method simplePaginateFilter($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method whereLike($column, $value, $boolean = 'and')
+ * @method whereBeginsWith($column, $value, $boolean = 'and')
+ * @method whereEndsWith($column, $value, $boolean = 'and')
+ */
 trait Filterable
 {
     /**
