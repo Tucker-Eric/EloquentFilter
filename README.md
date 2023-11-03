@@ -696,4 +696,4 @@ In your view `$users->render()` will return pagination links as it normally woul
 
 
 # Contributing
-Any contributions welcome!
+Any contributions are welcome!
