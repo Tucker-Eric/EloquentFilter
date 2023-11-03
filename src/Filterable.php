@@ -14,7 +14,7 @@ trait Filterable
     /**
      * Creates local scope to run the filter.
      *
-     * @param $query
+     * @param  $query
      * @param  array  $input
      * @param  null|string|ModelFilter  $filter
      * @return \Illuminate\Database\Eloquent\Builder
@@ -104,9 +104,9 @@ trait Filterable
     /**
      * WHERE $column LIKE %$value% query.
      *
-     * @param $query
-     * @param $column
-     * @param $value
+     * @param  $query
+     * @param  $column
+     * @param  $value
      * @param  string  $boolean
      * @return mixed
      */
@@ -118,9 +118,9 @@ trait Filterable
     /**
      * WHERE $column LIKE $value% query.
      *
-     * @param $query
-     * @param $column
-     * @param $value
+     * @param  $query
+     * @param  $column
+     * @param  $value
      * @param  string  $boolean
      * @return mixed
      */
@@ -132,9 +132,9 @@ trait Filterable
     /**
      * WHERE $column LIKE %$value query.
      *
-     * @param $query
-     * @param $column
-     * @param $value
+     * @param  $query
+     * @param  $column
+     * @param  $value
      * @param  string  $boolean
      * @return mixed
      */
