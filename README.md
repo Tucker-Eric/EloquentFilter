@@ -639,7 +639,7 @@ class UserFilter extends ModelFilter
 ##### Adding Relation Values To Filter
 
 Sometimes, based on the value of a parameter you may need to push data to a relation filter.  The `push()` method does just this.
-It accepts one argument as an array of key value pairs or to arguments as a key value pair `push($key, $value)`.
+It accepts one argument as an array of key value pairs or two arguments as a key value pair `push($key, $value)`.
 Related models are filtered AFTER all local values have been executed you can use this method in any filter method.
 This avoids having to query a related table more than once.  For Example:
 
