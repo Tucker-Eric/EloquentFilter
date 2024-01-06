@@ -98,13 +98,13 @@ class ModelFilterChildTest extends TestCase
     protected function dbSetup()
     {
         $config = collect([
-            'database.fetch'       => PDO::FETCH_CLASS,
-            'database.default'     => 'sqlite',
+            'database.fetch' => PDO::FETCH_CLASS,
+            'database.default' => 'sqlite',
             'database.connections' => [
                 'sqlite' => [
-                    'driver'   => 'sqlite',
+                    'driver' => 'sqlite',
                     'database' => ':memory:',
-                    'prefix'   => '',
+                    'prefix' => '',
                 ],
             ],
         ]);
