@@ -5,10 +5,9 @@
 [![Daily Downloads](https://poser.pugx.org/tucker-eric/eloquentfilter/d/daily)](https://packagist.org/packages/tucker-eric/eloquentfilter)
 [![License](https://poser.pugx.org/tucker-eric/eloquentfilter/license)](https://packagist.org/packages/tucker-eric/eloquentfilter)
 [![StyleCI](https://styleci.io/repos/53163405/shield)](https://styleci.io/repos/53163405/)
-[![Build Status](https://travis-ci.org/Tucker-Eric/EloquentFilter.svg?branch=master)](https://travis-ci.org/Tucker-Eric/EloquentFilter)
 [![PHPUnit Status](https://github.com/Tucker-Eric/EloquentFilter/workflows/PHPUnit/badge.svg?branch=master)](https://github.com/Tucker-Eric/EloquentFilter/actions?query=branch%3Amaster)
 
-An Eloquent way to filter Eloquent Models and their relationships
+An Eloquent way to filter Eloquent Models and their relationships.
 
 ## Introduction
 Lets say we want to return a list of users filtered by multiple parameters. When we navigate to:
@@ -19,11 +18,11 @@ Lets say we want to return a list of users filtered by multiple parameters. When
 
 ```php
 [
-    'name'              => 'er',
-    'last_name'   => '',
+    'name'       => 'er',
+    'last_name'  => '',
     'company_id' => '2',
-    'roles'            => ['1','4','7'],
-    'industry'      => '5'
+    'roles'      => ['1','4','7'],
+    'industry'   => '5'
 ]
 ```
 
@@ -258,8 +257,8 @@ To define methods for the following input:
 
 ```php
 [
-    'company_id'     => 5,
-    'name'                  => 'Tuck',
+    'company_id'   => 5,
+    'name'         => 'Tuck',
     'mobile_phone' => '888555'
 ]
 ```
@@ -347,8 +346,11 @@ The `Filterable` trait also comes with the below query builder helper methods:
 |EloquentFilter Method|QueryBuilder Equivalent|
 |---|---|
 |`$this->whereLike($column, $string)`|`$query->where($column, 'LIKE', '%'.$string.'%')`|
+|`$this->whereLike($column, $string, 'or')`|`$query->orWhere($column, 'LIKE', '%'.$string.'%')`|
 |`$this->whereBeginsWith($column, $string)`|`$query->where($column, 'LIKE', $string.'%')`|
+|`$this->whereBeginsWith($column, $string, 'or')`|`$query->orWhere($column, 'LIKE', $string.'%')`|
 |`$this->whereEndsWith($column, $string)`|`$query->where($column, 'LIKE', '%'.$string)`|
+|`$this->whereEndsWith($column, $string, 'or')`|`$query->orWhere($column, 'LIKE', '%'.$string)`|
 
 Since these methods are part of the `Filterable` trait they are accessible from any model that implements the trait without the need to call in the Model's EloquentFilter.
 
@@ -430,7 +432,7 @@ Input used to filter:
 
 ```php
 $input = [
-    'industry'                  => '5',
+    'industry'         => '5',
     'potential_volume' => '10000'
 ];
 ```
@@ -500,7 +502,7 @@ Add the relation in the `$relations` array with the name of the relation as refe
 
 The related model **MUST** have a ModelFilter associated with it.  We instantiate the related model's filter and use the input values from the `$relations` array to call the associated methods.
 
-This is helpful when querying multiple columns on a relation's table while avoiding multipe `whereHas()` calls for the same relationship.  For a single column using a `$this->whereHas()` method in the model filter works just fine.  In fact, under ther hood the model filter applies all constraints in the `whereHas()` method.
+This is helpful when querying multiple columns on a relation's table while avoiding multiple `whereHas()` calls for the same relationship.  For a single column using a `$this->whereHas()` method in the model filter works just fine.  In fact, under ther hood the model filter applies all constraints in the `whereHas()` method.
 
 ##### Example:
 
@@ -544,7 +546,7 @@ class UserFilter extends ModelFilter
 {
     public $relations = [
         'clients' => [
-            'client_industry'   => 'industry',
+            'client_industry'  => 'industry',
             'client_potential' => 'potential_volume'
         ]
     ];
@@ -554,14 +556,14 @@ class UserFilter extends ModelFilter
 The above will receive an array like:
 ```php
 [
-    'client_industry'   => 1,
+    'client_industry'  => 1,
     'client_potential' => 100000
 ]
 ```
 And the `ClientFilter` will receive it as:
 ```php
 [
-    'industry'                   => 1,
+    'industry'         => 1,
     'potential_volume' => 100000
 ]
 ```
@@ -574,11 +576,11 @@ If the following array is passed to the `filter()` method:
 
 ```php
 [
-    'name'                           => 'er',
-    'last_name'                => ''
-    'company_id'              => 2,
-    'roles'                         => [1,4,7],
-    'industry'                  => 5,
+    'name'             => 'er',
+    'last_name'        => '',
+    'company_id'       => 2,
+    'roles'            => [1,4,7],
+    'industry'         => 5,
     'potential_volume' => '10000'
 ]
 ```
@@ -637,7 +639,7 @@ class UserFilter extends ModelFilter
 ##### Adding Relation Values To Filter
 
 Sometimes, based on the value of a parameter you may need to push data to a relation filter.  The `push()` method does just this.
-It accepts one argument as an array of key value pairs or to arguments as a key value pair `push($key, $value)`.
+It accepts one argument as an array of key value pairs or two arguments as a key value pair `push($key, $value)`.
 Related models are filtered AFTER all local values have been executed you can use this method in any filter method.
 This avoids having to query a related table more than once.  For Example:
 
@@ -694,4 +696,4 @@ In your view `$users->render()` will return pagination links as it normally woul
 
 
 # Contributing
-Any contributions welcome!
+Any contributions are welcome!
