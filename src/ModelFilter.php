@@ -48,6 +48,8 @@ abstract class ModelFilter
      */
     protected $allowedEmptyFilters = [];
 
+    private $calledMethods = [];
+
     /**
      * Array of input to filter.
      *
@@ -226,6 +228,8 @@ abstract class ModelFilter
 
             if ($this->methodIsCallable($method)) {
                 $this->{$method}($val);
+
+                $this->calledMethods[] = $method;
             }
         }
     }
@@ -236,8 +240,10 @@ abstract class ModelFilter
             // Call all local methods on filter
             $method = $this->getFilterMethod($key);
 
-            if ($this->methodIsCallable($method)) {
+            if ($this->methodIsCallable($method) && !in_array($method, $this->calledMethods)) {
                 $this->{$method}(null);
+
+                $this->calledMethods[] = $method;
             }
         }
     }
