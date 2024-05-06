@@ -288,6 +288,15 @@ class ModelFilterTest extends TestCase
         $this->assertFalse($this->filter->methodIsBlacklisted($method));
     }
 
+    public function testAllowedEmptyFilter()
+    {   
+        self::markTestIncomplete('This test has not been implemented yet.');
+        /*
+            This test should set a allowedEmptyFilters value that is empty or null in the config.php file
+            Then it needs to test that the query builder has the where clause for the allowedEmptyFilters key
+        */
+    }
+
     public function testParentClassMethodsCantBeCalledByInput()
     {
         $badMethod = 'whitelistMethod';

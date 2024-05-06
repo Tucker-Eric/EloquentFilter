@@ -42,6 +42,13 @@ abstract class ModelFilter
     protected $blacklist = [];
 
     /**
+     * Array of method names that should not be called.
+     *
+     * @var array
+     */
+    protected $allowedEmptyFilters = [];
+
+    /**
      * Array of input to filter.
      *
      * @var array
@@ -95,6 +102,7 @@ abstract class ModelFilter
         $this->query = $query;
         $this->input = $this->removeEmptyInput($input);
         $this->relationsEnabled = $relationsEnabled;
+
         $this->registerMacros();
     }
 
@@ -145,6 +153,8 @@ abstract class ModelFilter
 
         // Run input filters
         $this->filterInput();
+        // Run filters with allowed empty inputs
+        $this->allowedEmptyFiltersInput();
         // Set up all the whereHas and joins constraints
         $this->filterRelations();
 
@@ -216,6 +226,18 @@ abstract class ModelFilter
 
             if ($this->methodIsCallable($method)) {
                 $this->{$method}($val);
+            }
+        }
+    }
+
+    public function allowedEmptyFiltersInput()
+    {
+        foreach ($this->allowedEmptyFilters as $key) {
+            // Call all local methods on filter
+            $method = $this->getFilterMethod($key);
+
+            if ($this->methodIsCallable($method)) {
+                $this->{$method}(null);
             }
         }
     }
