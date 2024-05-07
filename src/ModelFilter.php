@@ -42,13 +42,11 @@ abstract class ModelFilter
     protected $blacklist = [];
 
     /**
-     * Array of method names that should not be called.
+     * Filter out empty input so filter methods won't be called with empty values (strings, arrays, null)
      *
      * @var array
      */
-    protected $allowedEmptyFilters = [];
-
-    private $calledMethods = [];
+    protected $allowedEmptyFilters = false;
 
     /**
      * Array of input to filter.
@@ -102,7 +100,7 @@ abstract class ModelFilter
     public function __construct($query, array $input = [], $relationsEnabled = true)
     {
         $this->query = $query;
-        $this->input = $this->removeEmptyInput($input);
+        $this->input = $this->allowedEmptyFilters ? $input : $this->removeEmptyInput($input);
         $this->relationsEnabled = $relationsEnabled;
 
         $this->registerMacros();
@@ -155,8 +153,6 @@ abstract class ModelFilter
 
         // Run input filters
         $this->filterInput();
-        // Run filters with allowed empty inputs
-        $this->allowedEmptyFiltersInput();
         // Set up all the whereHas and joins constraints
         $this->filterRelations();
 
@@ -228,22 +224,6 @@ abstract class ModelFilter
 
             if ($this->methodIsCallable($method)) {
                 $this->{$method}($val);
-
-                $this->calledMethods[] = $method;
-            }
-        }
-    }
-
-    public function allowedEmptyFiltersInput()
-    {
-        foreach ($this->allowedEmptyFilters as $key) {
-            // Call all local methods on filter
-            $method = $this->getFilterMethod($key);
-
-            if ($this->methodIsCallable($method) && !in_array($method, $this->calledMethods)) {
-                $this->{$method}(null);
-
-                $this->calledMethods[] = $method;
             }
         }
     }
@@ -309,7 +289,7 @@ abstract class ModelFilter
      */
     public function callRelatedLocalSetup($related, $query)
     {
-        if (method_exists($this, $method = Str::camel($related).'Setup')) {
+        if (method_exists($this, $method = Str::camel($related) . 'Setup')) {
             $this->{$method}($query);
         }
     }
@@ -400,7 +380,7 @@ abstract class ModelFilter
         do {
             $relation = array_shift($parts);
             $related = $related->{$relation}()->getRelated();
-        } while (! empty($parts));
+        } while (!empty($parts));
 
         return $related;
     }
@@ -663,9 +643,9 @@ abstract class ModelFilter
      */
     public function methodIsCallable($method)
     {
-        return ! $this->methodIsBlacklisted($method) &&
+        return !$this->methodIsBlacklisted($method) &&
             method_exists($this, $method) &&
-            ! method_exists(ModelFilter::class, $method);
+            !method_exists(ModelFilter::class, $method);
     }
 
     /**
@@ -678,7 +658,7 @@ abstract class ModelFilter
      */
     protected function includeFilterInput($key, $value)
     {
-        return $value !== '' && $value !== null && ! (is_array($value) && empty($value));
+        return $value !== '' && $value !== null && !(is_array($value) && empty($value));
     }
 
     /**
@@ -690,8 +670,8 @@ abstract class ModelFilter
         if (
             method_exists(Relation::class, 'hasMacro') &&
             method_exists(Relation::class, 'macro') &&
-            ! Relation::hasMacro('paginateFilter') &&
-            ! Relation::hasMacro('simplePaginateFilter')
+            !Relation::hasMacro('paginateFilter') &&
+            !Relation::hasMacro('simplePaginateFilter')
         ) {
             Relation::macro('paginateFilter', function () {
                 $paginator = call_user_func_array([$this, 'paginate'], func_get_args());

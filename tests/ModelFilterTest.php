@@ -31,7 +31,7 @@ class ModelFilterTest extends TestCase
     {
         $this->builder = m::mock(EloquentBuilder::class);
         $this->filter = new TestModelFilter($this->builder);
-        $this->config = require __DIR__.'/config.php';
+        $this->config = require __DIR__ . '/config.php';
         $this->testInput = $this->config['test_input'];
     }
 
@@ -289,12 +289,25 @@ class ModelFilterTest extends TestCase
     }
 
     public function testAllowedEmptyFilter()
-    {   
-        self::markTestIncomplete('This test has not been implemented yet.');
-        /*
-            This test should set a allowedEmptyFilters value that is empty or null in the config.php file
-            Then it needs to test that the query builder has the where clause for the allowedEmptyFilters key
-        */
+    {
+        $emptyInput = [
+            'empty_array' => [],
+            'null_value' => null,
+            'empty_string' => ''
+        ];
+
+        $filter = new class($this->builder, $emptyInput) extends ModelFilter
+        {
+            protected $allowedEmptyFilters = true;
+        };
+
+        $this->assertEquals($filter->input(), $emptyInput);
+
+        $filter = new class($this->builder, $emptyInput) extends ModelFilter
+        {
+        };
+
+        $this->assertEquals($filter->input(), []);
     }
 
     public function testParentClassMethodsCantBeCalledByInput()
