@@ -31,7 +31,7 @@ class ModelFilterTest extends TestCase
     {
         $this->builder = m::mock(EloquentBuilder::class);
         $this->filter = new TestModelFilter($this->builder);
-        $this->config = require __DIR__ . '/config.php';
+        $this->config = require __DIR__.'/config.php';
         $this->testInput = $this->config['test_input'];
     }
 
@@ -293,7 +293,7 @@ class ModelFilterTest extends TestCase
         $emptyInput = [
             'empty_array' => [],
             'null_value' => null,
-            'empty_string' => ''
+            'empty_string' => '',
         ];
 
         $filter = new class($this->builder, $emptyInput) extends ModelFilter
@@ -303,8 +303,7 @@ class ModelFilterTest extends TestCase
 
         $this->assertEquals($filter->input(), $emptyInput);
 
-        $filter = new class($this->builder, $emptyInput) extends ModelFilter
-        {
+        $filter = new class($this->builder, $emptyInput) extends ModelFilter {
         };
 
         $this->assertEquals($filter->input(), []);

@@ -42,7 +42,7 @@ abstract class ModelFilter
     protected $blacklist = [];
 
     /**
-     * Filter out empty input so filter methods won't be called with empty values (strings, arrays, null)
+     * Filter out empty input so filter methods won't be called with empty values (strings, arrays, null).
      *
      * @var array
      */
@@ -289,7 +289,7 @@ abstract class ModelFilter
      */
     public function callRelatedLocalSetup($related, $query)
     {
-        if (method_exists($this, $method = Str::camel($related) . 'Setup')) {
+        if (method_exists($this, $method = Str::camel($related).'Setup')) {
             $this->{$method}($query);
         }
     }
@@ -380,7 +380,7 @@ abstract class ModelFilter
         do {
             $relation = array_shift($parts);
             $related = $related->{$relation}()->getRelated();
-        } while (!empty($parts));
+        } while (! empty($parts));
 
         return $related;
     }
@@ -643,9 +643,9 @@ abstract class ModelFilter
      */
     public function methodIsCallable($method)
     {
-        return !$this->methodIsBlacklisted($method) &&
+        return ! $this->methodIsBlacklisted($method) &&
             method_exists($this, $method) &&
-            !method_exists(ModelFilter::class, $method);
+            ! method_exists(ModelFilter::class, $method);
     }
 
     /**
@@ -658,7 +658,7 @@ abstract class ModelFilter
      */
     protected function includeFilterInput($key, $value)
     {
-        return $value !== '' && $value !== null && !(is_array($value) && empty($value));
+        return $value !== '' && $value !== null && ! (is_array($value) && empty($value));
     }
 
     /**
@@ -670,8 +670,8 @@ abstract class ModelFilter
         if (
             method_exists(Relation::class, 'hasMacro') &&
             method_exists(Relation::class, 'macro') &&
-            !Relation::hasMacro('paginateFilter') &&
-            !Relation::hasMacro('simplePaginateFilter')
+            ! Relation::hasMacro('paginateFilter') &&
+            ! Relation::hasMacro('simplePaginateFilter')
         ) {
             Relation::macro('paginateFilter', function () {
                 $paginator = call_user_func_array([$this, 'paginate'], func_get_args());
