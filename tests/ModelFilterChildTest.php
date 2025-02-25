@@ -89,8 +89,8 @@ class ModelFilterChildTest extends TestCase
             // Paginating relations will work before L5.4 but won't contain the pivot attribute
             $this->markTestSkipped(
                 'Pagination is overwritten with a Relation macro to append the pivot to pivotable relations.'
-                    . ' This was introduced in Laravel 5.4 when Relations implemented the Macroable trait.'
-                    . ' https://github.com/illuminate/database/commit/4d13b0f80439bd17befb0fd646a117b818efdb14'
+                    .' This was introduced in Laravel 5.4 when Relations implemented the Macroable trait.'
+                    .' https://github.com/illuminate/database/commit/4d13b0f80439bd17befb0fd646a117b818efdb14'
             );
         }
     }
@@ -114,7 +114,7 @@ class ModelFilterChildTest extends TestCase
         $this->db = new DatabaseManager($container, new ConnectionFactory($container));
         Model::setConnectionResolver($this->db);
         $connection = $this->db->connection('sqlite');
-        $installedVersion = (int)\Composer\InstalledVersions::getVersion("illuminate/database");
+        $installedVersion = (int) \Composer\InstalledVersions::getVersion('illuminate/database');
         $connection->setSchemaGrammar(
             $installedVersion >= 12 ? new \Illuminate\Database\Schema\Grammars\SQLiteGrammar($connection) : new \Illuminate\Database\Schema\Grammars\SQLiteGrammar
         );
@@ -148,10 +148,10 @@ class ModelFilterChildTest extends TestCase
             $client = Client::create($data);
             $client->locations()->create($data);
             /** @var User $user */
-            $user = User::create(['name' => 'Client' . $index]);
+            $user = User::create(['name' => 'Client'.$index]);
             $user->clients()->save($client);
             $client->managers()->save($user);
-            $otherUser = User::create(['name' => 'Client' . ++$index]);
+            $otherUser = User::create(['name' => 'Client'.++$index]);
             $client->managers()->save($otherUser);
         }
     }
