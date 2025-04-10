@@ -22,7 +22,6 @@ trait Filterable
     public function scopeFilter($query, array $input = [], $filter = null)
     {
         if ($filter === null) {
-
             if (class_exists($this->getModelFilterClass())) {
                 $filter = $this->getModelFilterClass();
 
