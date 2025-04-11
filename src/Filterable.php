@@ -21,23 +21,19 @@ trait Filterable
      */
     public function scopeFilter($query, array $input = [], $filter = null)
     {
+        // Resolve the current Model's filter
         if ($filter === null) {
-            if (class_exists($this->getModelFilterClass())) {
-                $filter = $this->getModelFilterClass();
-
-                $modelFilter = new $filter($query, $input);
-
-                // Set the input that was used in the filter (this will exclude empty strings)
-                $this->filtered = $modelFilter->input();
-
-                // Return the filter query
-                return $modelFilter->handle();
-            }
+            $filter = $this->getModelFilterClass();
         }
 
         // Create the model filter instance
+        $modelFilter = new $filter($query, $input);
 
-        return $query;
+        // Set the input that was used in the filter (this will exclude empty strings)
+        $this->filtered = $modelFilter->input();
+
+        // Return the filter query
+        return $modelFilter->handle();
     }
 
     /**
